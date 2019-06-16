@@ -49,12 +49,12 @@
                                 </a>
                                 <ul class="blog-info-link">
                                     <li><a href="#"><i class="far fa-user"></i> <span th:text="${question.writer.userId}"></span></a></li>
-                                    <li><a href="#"><i class="far fa-clock"></i> <span th:text="${#temporals.format(question.createTime, 'YY-MM-dd ')}"></span></a></li>
+                                    <li><a href="#"><i class="far fa-clock"></i> <span th:text="${#temporals.format(question.createTime, 'YY-MM-dd HH:mm')}"></span></a></li>
                                     <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
                                 </ul>
                             </div>
                         </article>
-
+						<a href="/questions/form" class="btn_3">질문 쓰기 <span class="flaticon-slim-right"></span> </a>
                         <nav class="blog-pagination justify-content-center d-flex">
                             <ul class="pagination">
                                 <li class="page-item">

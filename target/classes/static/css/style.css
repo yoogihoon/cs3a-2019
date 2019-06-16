@@ -34,13 +34,13 @@ input:hover, input:focus {
 
 /* line 18, E:/170 Kanox Agency/170_Kanox_Agency_html/sass/_common.scss */
 .section_padding {
-  padding: 140px 0px;
+  padding: 80px 0px;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   /* line 18, E:/170 Kanox Agency/170_Kanox_Agency_html/sass/_common.scss */
   .section_padding {
-    padding: 80px 0px;
+    padding: 50px 0px;
   }
 }
 

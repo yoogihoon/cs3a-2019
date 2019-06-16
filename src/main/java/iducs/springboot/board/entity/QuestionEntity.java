@@ -1,8 +1,9 @@
 package iducs.springboot.board.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,10 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import iducs.springboot.board.domain.Question;
-import iducs.springboot.board.domain.User;
 
 @Entity
 @Table(name = "question")
@@ -27,7 +29,11 @@ public class QuestionEntity {
 	@ManyToOne
 	@JoinColumn(name="fk_question_writer")
 	private UserEntity writer;	
-
+	
+	@OneToMany(mappedBy="question")
+	@OrderBy("createTime DESC")
+	private List<AnswerEntity> answers = new ArrayList<AnswerEntity>();
+	
 	@Lob
 	private String contents;
 	private LocalDateTime createTime;
@@ -43,6 +49,13 @@ public class QuestionEntity {
 	}
 	public void setWriter(UserEntity writer) {
 		this.writer = writer;
+	}
+	
+	public List<AnswerEntity> getAnswers() {
+		return answers;
+	}
+	public void setAnswers(List<AnswerEntity> answers) {
+		this.answers = answers;
 	}
 	public String getTitle() {
 		return title;
@@ -72,11 +85,11 @@ public class QuestionEntity {
 		return question;
 	}
 	public void buildEntity(Question question) {
-		UserEntity userEntity = new UserEntity();
-		userEntity.buildEntity(question.getWriter());
-		
 		id = question.getId();
 		title = question.getTitle();
+
+		UserEntity userEntity = new UserEntity();
+		userEntity.buildEntity(question.getWriter());
 		writer = userEntity;
 		contents = question.getContents();
 		createTime = question.getCreateTime();

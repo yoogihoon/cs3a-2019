@@ -3,8 +3,6 @@ package iducs.springboot.board.controller;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import iducs.springboot.board.domain.User;
-import iducs.springboot.board.exception.ResourceNotFoundException;
-import iducs.springboot.board.repository.UserRepository;
 import iducs.springboot.board.service.UserService;
 
 @Controller
@@ -35,8 +31,9 @@ public class UserController {
 		return "redirect:/users";
 	}	
 	@GetMapping("")
-	public String getAllUser(Model model, HttpSession session) {
-		model.addAttribute("users", userService.getUsers());
+	public String getUsers(Model model, HttpSession session, Long pageNo) { //@PathVariable(value = "pageNo") Long pageNo) {
+		System.out.println(pageNo);
+		model.addAttribute("users", userService.getUsers(pageNo));
 		return "/users/list";
 	}	
 	@GetMapping("/{id}")
@@ -82,7 +79,6 @@ public class UserController {
 	@GetMapping("/users/n")
 	public String getEmployeeByName(@Param(value = "name") String name, Model model)
 			throws ResourceNotFoundException {
-		System.out.println(name);
 		List<User> users = userRepo.findByNameOrderByIdAsc(name);
 		model.addAttribute("users", users);
 		return "user-list";
