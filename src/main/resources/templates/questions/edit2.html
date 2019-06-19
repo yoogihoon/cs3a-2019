@@ -36,6 +36,7 @@
                   </div>
                   <div class="blog_details">
                      <h2>제목 : <span th:text="${question.title}"></span></h2>
+                     
                      <ul class="blog-info-link mt-3 mb-4">
                      	<li><a href="#"><i class="far fa-user"></i> <span th:text="${question.writer.userId}"></span></a></li>
                         <li><a href="#"><i class="far fa-clock"></i> <span th:text="${#temporals.format(question.createTime, 'yyyy년 MM월 dd일 HH:mm')}"></span></a></li>
@@ -45,7 +46,9 @@
                         <div class="quotes" th:text="${question.contents}">
                            
                         </div>
+                        
                      </div>
+                     
                      <p>
                         MCSE boot camps have its supporters and its detractors. Some people do not understand why you
                         should have to spend money on boot camp when you can get the MCSE study materials yourself at a
