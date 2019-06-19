@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import iducs.springboot.board.domain.Answer;
+import iducs.springboot.board.domain.Comment;
 import iducs.springboot.board.domain.Question;
 import iducs.springboot.board.domain.User;
 import iducs.springboot.board.exception.ResourceNotFoundException;
@@ -52,8 +52,8 @@ public class QuerstionController {
 	@GetMapping("/{id}")
 	public String getQuestionById(@PathVariable(value = "id") Long id, Model model) {
 		Question question = questionService.getQuestionById(id);
-		for(Answer answer : question.getAnswers())
-			System.out.println(answer.getContents());
+		for(Comment comment : question.getComments())
+			System.out.println(comment.getContents());
 		model.addAttribute("question", question);
 		return "/questions/info";
 	}

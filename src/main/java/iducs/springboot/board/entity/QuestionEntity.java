@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -30,9 +31,9 @@ public class QuestionEntity {
 	@JoinColumn(name="fk_question_writer")
 	private UserEntity writer;	
 	
-	@OneToMany(mappedBy="question")
+	@OneToMany(mappedBy="question", cascade = CascadeType.ALL, orphanRemoval = true)
 	@OrderBy("createTime DESC")
-	private List<AnswerEntity> answers = new ArrayList<AnswerEntity>();
+	private List<CommentEntity> comments = new ArrayList<CommentEntity>();
 	
 	@Lob
 	private String contents;
@@ -51,11 +52,11 @@ public class QuestionEntity {
 		this.writer = writer;
 	}
 	
-	public List<AnswerEntity> getAnswers() {
-		return answers;
+	public List<CommentEntity> getComments() {
+		return comments;
 	}
-	public void setAnswers(List<AnswerEntity> answers) {
-		this.answers = answers;
+	public void setComments(List<CommentEntity> comments) {
+		this.comments = comments;
 	}
 	public String getTitle() {
 		return title;

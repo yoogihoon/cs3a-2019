@@ -8,9 +8,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import iducs.springboot.board.entity.AnswerEntity;
+import iducs.springboot.board.entity.CommentEntity;
 
 @Repository
-public interface AnswerRepository 
-	extends JpaRepository<AnswerEntity, Long> {		
+public interface CommentRepository 
+	extends JpaRepository<CommentEntity, Long> {		
 }

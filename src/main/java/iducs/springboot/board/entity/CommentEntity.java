@@ -11,49 +11,49 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import iducs.springboot.board.domain.Answer;
+import iducs.springboot.board.domain.Comment;
 
 @Entity
-@Table (name="answer")
-public class AnswerEntity {
+@Table (name="comment")
+public class CommentEntity {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
 	@ManyToOne
-	@JoinColumn(name="fk_answer_writer")
+	@JoinColumn(name="fk_comment_writer")
 	private UserEntity writer;
 	
 	@ManyToOne
-	@JoinColumn(name="fk_answer_question")
+	@JoinColumn(name="fk_comment_question")
 	private QuestionEntity question;
 
 	@Lob
 	private String contents;
 	private LocalDateTime createTime;
 	
-	public Answer buildDomain() {
-		Answer answer = new Answer();
-		answer.setId(id);
-		answer.setWriter(writer.buildDomain());
-		answer.setQuestion(question.buildDomain());
-		answer.setContents(contents);
-		answer.setCreateTime(createTime);
-		return answer;
+	public Comment buildDomain() {
+		Comment comment = new Comment();
+		comment.setId(id);
+		comment.setWriter(writer.buildDomain());
+		comment.setQuestion(question.buildDomain());
+		comment.setContents(contents);
+		comment.setCreateTime(createTime);
+		return comment;
 	}
-	public void buildEntity(Answer answer) {
-		id = answer.getId();
+	public void buildEntity(Comment comment) {
+		id = comment.getId();
 
 		UserEntity userEntity = new UserEntity();
-		userEntity.buildEntity(answer.getWriter());
+		userEntity.buildEntity(comment.getWriter());
 		writer = userEntity;
 		
 		QuestionEntity quesitonEntity = new QuestionEntity();
-		quesitonEntity.buildEntity(answer.getQuestion());
+		quesitonEntity.buildEntity(comment.getQuestion());
 		question = quesitonEntity;
 		
-		contents = answer.getContents();
-		createTime = answer.getCreateTime();
+		contents = comment.getContents();
+		createTime = comment.getCreateTime();
 	}
 	
 	@Override
@@ -72,7 +72,7 @@ public class AnswerEntity {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AnswerEntity other = (AnswerEntity) obj;
+		CommentEntity other = (CommentEntity) obj;
 		if (createTime == null) {
 			if (other.createTime != null)
 				return false;

@@ -28,7 +28,7 @@ public class UserController {
 	public String createUser(@Valid User formUser, Model model) {
 		userService.saveUser(formUser); 
 		model.addAttribute("user", formUser);
-		return "redirect:/users";
+		return "redirect:/users?pageNo=1";
 	}	
 	@GetMapping("")
 	public String getUsers(Model model, HttpSession session, Long pageNo) { //@PathVariable(value = "pageNo") Long pageNo) {
@@ -58,7 +58,7 @@ public class UserController {
 	public String deleteUserById(@PathVariable(value = "id") Long id, @Valid User formUser, Model model) {
 		userService.deleteUser(formUser);
 		model.addAttribute("name", formUser.getName());
-		return "/users/withdrawal";
+		return "redirect:/users?pageNo=1";
 	}
 	
 	/*

@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import iducs.springboot.board.domain.Answer;
+import iducs.springboot.board.domain.Comment;
 import iducs.springboot.board.domain.Question;
 import iducs.springboot.board.domain.User;
-import iducs.springboot.board.entity.AnswerEntity;
+import iducs.springboot.board.entity.CommentEntity;
 import iducs.springboot.board.entity.QuestionEntity;
 import iducs.springboot.board.entity.UserEntity;
 import iducs.springboot.board.repository.QuestionRepository;
@@ -28,10 +28,10 @@ public class QuestionServiceImpl implements QuestionService {
 		
 		Question question = entity.buildDomain();
 		
-		List<Answer> answerList = new ArrayList<Answer>();
-		for(AnswerEntity answerEntity : entity.getAnswers())
-			answerList.add(answerEntity.buildDomain());
-		question.setAnswers(answerList);
+		List<Comment> commentList = new ArrayList<Comment>();
+		for(CommentEntity commentEntity : entity.getComments())
+			commentList.add(commentEntity.buildDomain());
+		question.setComments(commentList);
 		
 		return question;
 	}
@@ -86,6 +86,12 @@ public class QuestionServiceImpl implements QuestionService {
 		entity.buildEntity(question);
 		repository.delete(entity);
 		
+	}
+
+	@Override
+	public List<Question> getQuestions(Long pageNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

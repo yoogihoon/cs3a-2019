@@ -7,7 +7,7 @@ public class Question {
 	private long id; // primary key
 	private String title; 
 	private User writer;	
-	private List<Answer> answers;
+	private List<Comment> comments;
 	private String contents;
 	private LocalDateTime createTime;	
 	
@@ -44,11 +44,11 @@ public class Question {
 		this.writer = writer;
 	}
 		
-	public List<Answer> getAnswers() {
-		return answers;
+	public List<Comment> getComments() {
+		return comments;
 	}
-	public void setAnswers(List<Answer> answers) {
-		this.answers = answers;
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 	
 	public String getContents() {
